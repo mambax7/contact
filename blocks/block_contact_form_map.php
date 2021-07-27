@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -22,14 +24,17 @@
  * @return array
  */
 
-use XoopsModules\Contact;
+use XoopsModules\Contact\{
+    Helper
+};
+/** @var Helper $helper */
 
 // Function show block form only
 /**
  * @param $options
  * @return array
  */
-function block_contact_form_show($options)
+function block_contact_form_show($options): array
 {
     $block = [];
     contactGetElements($block);
@@ -42,7 +47,7 @@ function block_contact_form_show($options)
  * @param $options
  * @return array
  */
-function block_contact_map_show($options)
+function block_contact_map_show($options): array
 {
     $block = [];
     contactGetElements($block);
@@ -55,7 +60,7 @@ function block_contact_map_show($options)
  * @param $options
  * @return array
  */
-function block_contact_form_map_show($options)
+function block_contact_form_map_show($options): array
 {
     $block = [];
     contactGetElements($block);
@@ -68,11 +73,8 @@ function block_contact_form_map_show($options)
  */
 function contactGetElements(&$block)
 {
-    $helper = Contact\Helper::getInstance();
-
-    xoops_loadLanguage('main', 'contact');
-
-    require_once XOOPS_ROOT_PATH . '/modules/contact/class/contact.php';
+    $helper = Helper::getInstance();
+    $helper->loadLanguage('main');
 
     $block['lng_username'] = 'name';
 
@@ -80,7 +82,7 @@ function contactGetElements(&$block)
     if (1 == $helper->getConfig('form_dept')) {
         // show a drop down with the correct departments listed
         $departmentlist = [];
-        $departments    = xoops_getModuleOption('contact_dept', 'contact');
+        $departments    = $helper->getConfig('contact_dept');
         foreach ($departments as $val) {
             [$name, $email] = explode(',', $val, 2); //split the name and email
             $departmentlist[] = $name;
