@@ -1,6 +1,6 @@
 <div class="contact">
     <{$navigation|default:''}>
-    <{if $form}><{$form}><{/if}>
+    <{if $form|default:''}><{$form}><{/if}>
     <{if $logs|default:''}>
     <div class="pad2">
         <ul>
