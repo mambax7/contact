@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 // index
 define('_AM_CONTACT_INDEX_ADMENU1', 'Kontakt');
 define('_AM_CONTACT_INDEX_TOTAL', "Es befinden sich  <span class='green'>%s</span> Anfragen in der Datenbank");

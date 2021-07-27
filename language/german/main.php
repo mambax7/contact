@@ -1,4 +1,6 @@
 <?php
+
+declare(strict_types=1);
 define('_MD_CONTACT_FORM', 'Kontaktformular');
 define('_MD_CONTACT_NAME', 'Name');
 define('_MD_CONTACT_MAIL', 'E-Mail');
