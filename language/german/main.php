@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 define('_MD_CONTACT_FORM', 'Kontaktformular');
 define('_MD_CONTACT_NAME', 'Name');
 define('_MD_CONTACT_MAIL', 'E-Mail');
@@ -40,7 +38,9 @@ define('_MD_CONTACT_SUBJECT_INFO', 'Betreff eingeben');
 define('_MD_CONTACT_MESSAGE_INFO', 'Nachricht eingeben');
 //2.21
 define('_MD_CONTACT_MAILCONFIRM_SUBJECT', 'Bestätigungsmail');
-define('_MD_CONTACT_MAILCONFIRM_BODY', '
+define(
+    '_MD_CONTACT_MAILCONFIRM_BODY',
+    '
 Sehr geehrte(r) {NAME}
 
 Wir bestätigen Ihnen den Erhalt der E-Mail
@@ -50,4 +50,5 @@ Nachricht:
 {BODY}
 
 Wir werden uns so bald wie möglich mit Ihnen in Verbindung setzen.
-');
+'
+);

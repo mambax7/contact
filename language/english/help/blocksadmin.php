@@ -15,7 +15,8 @@
  * @since
  * @author       XOOPS Development Team
  */
-
+$moduleDirName      = \basename(\dirname(__DIR__, 2));
+$moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 // Blocks & Groups Admin
 \define('CO_' . $moduleDirNameUpper . '_' . 'TOPPAGE', 'Top Page');
 \define('CO_' . $moduleDirNameUpper . '_' . 'ALLPAGES', 'All Pages');

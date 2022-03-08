@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 // index
 define('_AM_CONTACT_INDEX_ADMENU1', 'Kontakt');
 define('_AM_CONTACT_INDEX_TOTAL', "Es befinden sich  <span class='green'>%s</span> Anfragen in der Datenbank");
@@ -57,4 +55,3 @@ define('_AM_CONTACT_ERROR_COLUMN', 'Konnte neue Spalte in Datenbank nicht erstel
 define('_AM_CONTACT_ERROR_BAD_XOOPS', 'Dieses Modul benötigt mindestens Xoops Version %s (Ihre derzeitige Version ist %s)');
 define('_AM_CONTACT_ERROR_BAD_PHP', 'Dieses Modul benötigt mindestens PHP Version %s (Ihre derzeitige Version ist %s)');
 define('_AM_CONTACT_ERROR_TAG_REMOVAL', 'Konnte Tags vom Modul Tag nicht entfernen');
-

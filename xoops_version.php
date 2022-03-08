@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -15,7 +13,7 @@ declare(strict_types=1);
  * Contact module
  *
  * @copyright   XOOPS Project (https://xoops.org)
- * @license     http://www.fsf.org/copyleft/gpl.html GNU public license
+ * @license     https://www.fsf.org/copyleft/gpl.html GNU public license
  * @author      Kazumi Ono (aka Onokazu)
  * @author      Trabis <lusopoemas@gmail.com>
  * @author      Hossein Azizabadi (AKA Voltan)
@@ -27,9 +25,9 @@ require_once __DIR__ . '/preloads/autoloader.php';
 
 $moduleDirName = basename(__DIR__);
 
-// ------------------- Informations ------------------- //
+// ------------------- Information ------------------- /
 $modversion = [
-    'version'             => 2.27,
+    'version'             => '2.27.0',
     'module_status'       => 'RC-1',
     'release_date'        => '2021/07/27',
     'name'                => _MI_CONTACT_NAME,
@@ -64,7 +62,7 @@ $modversion = [
     'module_website_url'  => 'www.xoops.org',
     'module_website_name' => 'XOOPS Project',
     // ------------------- Min Requirements -------------------
-    'min_php'             => '7.3',
+    'min_php'             => '7.4',
     'min_xoops'           => '2.5.10',
     'min_admin'           => '1.2',
     'min_db'              => ['mysql' => '5.1'],
@@ -102,7 +100,7 @@ $modversion['helpsection'] = [
 
 // ------------------- Templates ------------------- //
 $modversion['templates'] = [
-    ['file' => $moduleDirName . '_index.tpl', 'description' => '_MI_CONTACT_TEMPLATES',],
+    ['file' => $moduleDirName . '_index.tpl', 'description' => '_MI_CONTACT_TEMPLATES'],
 ];
 
 // ------------------- Blocks ------------------- //
@@ -111,6 +109,7 @@ $modversion['blocks'][] = [
     'name'        => _MI_B_CONTACT_FORM,
     'description' => _MI_B_CONTACT_FORM_DESC,
     'show_func'   => 'block_' . $moduleDirName . '_form_show',
+    'edit_func'   => 'block_' . $moduleDirName . '_form_show',
     'options'     => '',
     'template'    => 'block_' . $moduleDirName . '_form.tpl',
 ];
@@ -119,6 +118,7 @@ $modversion['blocks'][] = [
     'name'        => _MI_B_CONTACT_MAP,
     'description' => _MI_B_CONTACT_MAP_DESC,
     'show_func'   => 'block_' . $moduleDirName . '_map_show',
+    'edit_func'   => 'block_' . $moduleDirName . '_map_show',
     'options'     => '',
     'template'    => 'block_' . $moduleDirName . '_map.tpl',
 ];
@@ -127,6 +127,7 @@ $modversion['blocks'][] = [
     'name'        => _MI_B_CONTACT_FORM_MAP,
     'description' => _MI_B_CONTACT_FORM_MAP_DESC,
     'show_func'   => 'block_' . $moduleDirName . '_form_map_show',
+    'edit_func'   => 'block_' . $moduleDirName . '_form_map_show',
     'options'     => '',
     'template'    => 'block_' . $moduleDirName . '_form_map.tpl',
 ];
@@ -135,8 +136,9 @@ $modversion['blocks'][] = [
     'name'        => _MI_B_CONTACT_INFO_MAP,
     'description' => _MI_B_CONTACT_INFO_MAP_DESC,
     'show_func'   => 'block_' . $moduleDirName . '_form_map_show',
+    'edit_func'   => 'block_' . $moduleDirName . '_form_map_show',
     'options'     => '',
-    'template'    => 'block_' . $moduleDirName . '_info_map.tpl'
+    'template'    => 'block_' . $moduleDirName . '_info_map.tpl',
 ];
 
 // Settings

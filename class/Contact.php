@@ -1,8 +1,8 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Contact;
+
+use XoopsObject;
 
 /*
  You may not change or alter any portion of this comment or credits
@@ -18,7 +18,7 @@ namespace XoopsModules\Contact;
  * Contact module
  *
  * @copyright     XOOPS Project (https://xoops.org)
- * @license       http://www.fsf.org/copyleft/gpl.html GNU public license
+ * @license       https://www.fsf.org/copyleft/gpl.html GNU public license
  * @author        Kazumi Ono (aka Onokazu)
  * @author        Trabis <lusopoemas@gmail.com>
  * @author        Hossein Azizabadi (AKA Voltan)
@@ -28,7 +28,7 @@ namespace XoopsModules\Contact;
 /**
  * Class contact
  */
-class Contact extends \XoopsObject
+class Contact extends XoopsObject
 {
     private $db;
     private $table;
@@ -67,7 +67,7 @@ class Contact extends \XoopsObject
     /**
      * @return \XoopsThemeForm
      */
-    public function contactReplyForm()
+    public function contactReplyForm(): \XoopsThemeForm
     {
         //        global $xoopsConfig;
         $form = new \XoopsThemeForm(_AM_CONTACT_REPLY, 'doreply', 'main.php', 'post', true);

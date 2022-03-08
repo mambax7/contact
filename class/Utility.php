@@ -1,11 +1,8 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Contact;
 
 use RuntimeException;
-use XoopsModules\Contact\Common;
 
 /**
  * Class Utility
@@ -20,7 +17,7 @@ class Utility extends Common\SysUtility
      *
      * @return void
      */
-    public static function createFolder($folder)
+    public static function createFolder($folder): void
     {
         //        try {
         //            if (!mkdir($folder) && !is_dir($folder)) {
@@ -36,9 +33,8 @@ class Utility extends Common\SysUtility
             if (!\is_dir($folder)) {
                 if (!\mkdir($folder) && !\is_dir($folder)) {
                     throw new RuntimeException(\sprintf('Unable to create the %s directory', $folder));
-                } else {
-                    file_put_contents($folder . '/index.html', '<script>history.go(-1);</script>');
                 }
+                file_put_contents($folder . '/index.html', '<script>history.go(-1);</script>');
             }
         } catch (\Exception $e) {
             echo 'Caught exception: ', $e->getMessage(), "\n", '<br>';
@@ -46,35 +42,15 @@ class Utility extends Common\SysUtility
     }
 
     /**
-     * @param $file
-     * @param $folder
-     * @return bool
-     */
-    public static function copyFile($file, $folder)
-    {
-        return \copy($file, $folder);
-        //        try {
-        //            if (!is_dir($folder)) {
-        //                throw new \RuntimeException(sprintf('Unable to copy file as: %s ', $folder));
-        //            } else {
-        //                return copy($file, $folder);
-        //            }
-        //        } catch (Exception $e) {
-        //            echo 'Caught exception: ', $e->getMessage(), "\n", "<br>";
-        //        }
-        //        return false;
-    }
-
-    /**
      * @param $src
      * @param $dst
      */
-    public static function recurseCopy($src, $dst)
+    public static function recurseCopy($src, $dst): void
     {
         $dir = \opendir($src);
         //    @mkdir($dst);
         while (false !== ($file = \readdir($dir))) {
-            if (($file !== '.') && ($file !== '..')) {
+            if (('.' !== $file) && ('..' !== $file)) {
                 if (\is_dir($src . '/' . $file)) {
                     self::recurseCopy($src . '/' . $file, $dst . '/' . $file);
                 } else {
@@ -86,7 +62,6 @@ class Utility extends Common\SysUtility
     }
 
     /**
-     *
      * Verifies XOOPS version meets minimum requirements for this module
      * @static
      * @param \XoopsModule $module
@@ -108,7 +83,6 @@ class Utility extends Common\SysUtility
     //    }
 
     /**
-     *
      * Verifies PHP version meets minimum requirements for this module
      * @static
      * @param \XoopsModule $module

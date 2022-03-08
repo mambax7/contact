@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -15,7 +13,7 @@ declare(strict_types=1);
  * Contact module
  *
  * @copyright   XOOPS Project (https://xoops.org)
- * @license     http://www.fsf.org/copyleft/gpl.html GNU public license
+ * @license     https://www.fsf.org/copyleft/gpl.html GNU public license
  * @author      Kazumi Ono (aka Onokazu)
  * @author      Trabis <lusopoemas@gmail.com>
  * @author      Hossein Azizabadi (AKA Voltan)
@@ -26,18 +24,18 @@ use XoopsModules\Contact\{
     ContactHandler,
     Helper
 };
+
 /** @var Admin $adminObject */
 /** @var ContactHandler $contactHandler */
-
-require dirname(__DIR__, 3) . '/include/cp_header.php';
-require dirname(__DIR__) . '/preloads/autoloader.php';
+require \dirname(__DIR__, 3) . '/include/cp_header.php';
+require \dirname(__DIR__) . '/preloads/autoloader.php';
 
 require_once XOOPS_ROOT_PATH . '/class/pagenav.php';
 require_once XOOPS_ROOT_PATH . '/class/xoopsformloader.php';
 global $xoopsModule;
 
 $moduleDirName = $GLOBALS['xoopsModule']->getVar('dirname');
-$helper = Helper::getInstance();
+$helper        = Helper::getInstance();
 /** @var Xmf\Module\Admin $adminObject */
 $adminObject = Admin::getInstance();
 
@@ -48,8 +46,8 @@ if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof \XoopsTpl)
     $xoopsTpl = new \XoopsTpl();
 }
 
-$pathIcon16    = Xmf\Module\Admin::iconUrl('', 16);
-$pathIcon32    = Xmf\Module\Admin::iconUrl('', 32);
+$pathIcon16    = Xmf\Module\Admin::iconUrl('', '16');
+$pathIcon32    = Xmf\Module\Admin::iconUrl('', '32');
 $pathModIcon32 = $helper->getConfig('modicons32');
 
 // Local icons path
@@ -60,6 +58,7 @@ $xoopsTpl->assign('pathModIcon32', $pathIcon32);
 $helper->loadLanguage('admin');
 $helper->loadLanguage('modinfo');
 $helper->loadLanguage('main');
+$helper->loadLanguage('common');
 
 // Contact Handler
 $contactHandler = Helper::getInstance()->getHandler('Contact');

@@ -8,7 +8,7 @@
  * which is considered copyrighted (c) material of the original comment or credit authors.
  *
  * @copyright   XOOPS Project (https://xoops.org)
- * @license     http://www.fsf.org/copyleft/gpl.html GNU public license
+ * @license     https://www.fsf.org/copyleft/gpl.html GNU public license
  * @package     system
  */
 

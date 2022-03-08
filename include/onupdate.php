@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -15,7 +13,7 @@ declare(strict_types=1);
  * Contact module
  *
  * @copyright   XOOPS Project (https://xoops.org)
- * @license     http://www.fsf.org/copyleft/gpl.html GNU public license
+ * @license     https://www.fsf.org/copyleft/gpl.html GNU public license
  * @author      Kazumi Ono (aka Onokazu)
  * @author      Trabis <lusopoemas@gmail.com>
  * @author      Hossein Azizabadi (AKA Voltan)
@@ -28,16 +26,14 @@ use XoopsModules\Contact\{
     Helper,
     Utility
 };
+
 /** @var Helper $helper */
 /** @var Utility $utility */
 /** @var Configurator $configurator */
-
 if ((!defined('XOOPS_ROOT_PATH')) || !($GLOBALS['xoopsUser'] instanceof \XoopsUser)
     || !$GLOBALS['xoopsUser']->isAdmin()) {
     exit('Restricted access' . PHP_EOL);
 }
-
-
 
 /**
  * Prepares system prior to attempting to install module
@@ -69,7 +65,7 @@ function xoops_module_pre_update_contact(\XoopsModule $module)
 function xoops_module_update_contact(\XoopsModule $module, $previousVersion = null)
 {
     $moduleDirName      = \basename(\dirname(__DIR__));
-    $moduleDirNameUpper = mb_strtoupper($moduleDirName);
+    $moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 
     /** @var Helper $helper */
     /** @var Utility $utility */
@@ -136,7 +132,7 @@ function xoops_module_update_contact(\XoopsModule $module, $previousVersion = nu
 
     if ($previousVersion < 227) {
         $configurator = new Configurator();
-        $utility = new Utility();
+        $utility      = new Utility();
 
         //delete old HTML templates
         if (count($configurator->templateFolders) > 0) {
@@ -173,7 +169,7 @@ function xoops_module_update_contact(\XoopsModule $module, $previousVersion = nu
             //    foreach (array_keys($GLOBALS['uploadFolders']) as $i) {
             foreach (array_keys($configurator->oldFolders) as $i) {
                 $tempFolder = $GLOBALS['xoops']->path('modules/' . $moduleDirName . $configurator->oldFolders[$i]);
-                /* @var XoopsObjectHandler $folderHandler */
+                /** @var XoopsObjectHandler $folderHandler */
                 $folderHandler = XoopsFile::getHandler('folder', $tempFolder);
                 $folderHandler->delete($tempFolder);
             }
@@ -189,7 +185,7 @@ function xoops_module_update_contact(\XoopsModule $module, $previousVersion = nu
 
         //  ---  COPY blank.png FILES ---------------
         if (count($configurator->copyBlankFiles) > 0) {
-            $file = dirname(__DIR__) . '/assets/images/blank.png';
+            $file = \dirname(__DIR__) . '/assets/images/blank.png';
             foreach (array_keys($configurator->copyBlankFiles) as $i) {
                 $dest = $configurator->copyBlankFiles[$i] . '/blank.png';
                 $utility::copyFile($file, $dest);

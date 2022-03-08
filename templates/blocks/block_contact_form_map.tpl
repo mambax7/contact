@@ -92,7 +92,7 @@
                 </div>
             </div>
             <{/if}>
-            <{if $block.depart}>
+            <{if $block.depart|default:''}>
             <div class="form-group">
                 <label for="contact_department" class="col-sm-2 control-label"><{$block.lng_department}></label>
                 <div class="col-sm-10">

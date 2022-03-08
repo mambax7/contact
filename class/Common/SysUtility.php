@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Contact\Common;
 
@@ -18,7 +16,6 @@ namespace XoopsModules\Contact\Common;
  */
 
 /**
- *
  * @license      https://www.fsf.org/copyleft/gpl.html GNU public license
  * @copyright    https://xoops.org 2000-2020 &copy; XOOPS Project
  * @author       ZySpec <zyspec@yahoo.com>
@@ -57,7 +54,7 @@ class SysUtility
      *
      * @return string Trimmed string.
      */
-    public static function truncateHtml($text, $length = 100, $ending = '...', $exact = false, $considerHtml = true)
+    public static function truncateHtml($text, $length = 100, $ending = '...', $exact = false, $considerHtml = true): string
     {
         if ($considerHtml) {
             // if the plain text is shorter than the maximum length, return the whole text
@@ -85,7 +82,7 @@ class SysUtility
                         // if tag is an opening tag
                     } elseif (\preg_match('/^<\s*([^\s>!]+).*?' . '>$/s', $line_matchings[1], $tag_matchings)) {
                         // add tag to the beginning of $open_tags list
-                        \array_unshift($open_tags, mb_strtolower($tag_matchings[1]));
+                        \array_unshift($open_tags, \mb_strtolower($tag_matchings[1]));
                     }
                     // add html-tag to $truncate'd text
                     $truncate .= $line_matchings[1];
@@ -193,7 +190,7 @@ class SysUtility
      *
      * @return bool
      */
-    public static function fieldExists($fieldname, $table)
+    public static function fieldExists(string $fieldname, string $table): bool
     {
         global $xoopsDB;
         $result = $xoopsDB->queryF("SHOW COLUMNS FROM   $table LIKE '$fieldname'");
@@ -206,25 +203,28 @@ class SysUtility
      * @param int          $id_field
      * @param int          $id
      *
-     * @return void
+     * @return int
      */
     public static function cloneRecord($tableName, $id_field, $id)
     {
         $new_id = false;
         $table  = $GLOBALS['xoopsDB']->prefix($tableName);
-        // copy content of the record you wish to clone 
-        $sql       = "SELECT * FROM $table WHERE $id_field='$id' ";
-        $tempTable = $GLOBALS['xoopsDB']->fetchArray($GLOBALS['xoopsDB']->query($sql), \MYSQLI_ASSOC);
+        // copy content of the record you wish to clone
+        $sql    = "SELECT * FROM $table WHERE $idField='" . $id . "' ";
+        $result = $GLOBALS['xoopsDB']->query($sql);
+        if ($result instanceof \mysqli_result) {
+            $tempTable = $GLOBALS['xoopsDB']->fetchArray($result, \MYSQLI_ASSOC);
+        }
         if (!$tempTable) {
-            exit($GLOBALS['xoopsDB']->error());
+            \trigger_error($GLOBALS['xoopsDB']->error());
         }
         // set the auto-incremented id's value to blank.
         unset($tempTable[$id_field]);
-        // insert cloned copy of the original  record 
-        $sql    = "INSERT INTO $table (" . \implode(', ', \array_keys($tempTable)) . ") VALUES ('" . \implode("', '", \array_values($tempTable)) . "')";
+        // insert cloned copy of the original  record
+        $sql    = "INSERT INTO $table (" . \implode(', ', \array_keys($tempTable)) . ") VALUES ('" . \implode("', '", $tempTable) . "')";
         $result = $GLOBALS['xoopsDB']->queryF($sql);
         if (!$result) {
-            exit($GLOBALS['xoopsDB']->error());
+            \trigger_error($GLOBALS['xoopsDB']->error());
         }
         // Return the new id
         $new_id = $GLOBALS['xoopsDB']->getInsertId();
@@ -237,7 +237,7 @@ class SysUtility
      *
      * @return bool
      */
-    public static function tableExists($tablename)
+    public static function tableExists($tablename): bool
     {
         $result = $GLOBALS['xoopsDB']->queryF("SHOW TABLES LIKE '$tablename'");
 

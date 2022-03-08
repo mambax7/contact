@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 // Module Info
 // The name of this module
 define('_MI_CONTACT_NAME', 'Contact us');

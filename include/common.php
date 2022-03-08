@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -15,20 +13,19 @@ declare(strict_types=1);
  * contact module for xoops
  *
  * @copyright       XOOPS Project (https://xoops.org)
- * @license         GPL 2.0 or later
- * @package         contact
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @since           1.0
  * @min_xoops       2.5.7
- * @author          Goffy (xoops.wedega.com) - Email:<webmaster@wedega.com> - Website:<http://xoops.wedega.com>
+ * @author          Goffy (xoops.wedega.com) - Email:<webmaster@wedega.com> - Website:<https://xoops.wedega.com>
  */
 
 use Xmf\Module\Admin;
 use XoopsModules\Contact;
 
-require_once dirname(__DIR__) . '/preloads/autoloader.php';
+require_once \dirname(__DIR__) . '/preloads/autoloader.php';
 
 $moduleDirName      = \basename(\dirname(__DIR__));
-$moduleDirNameUpper = mb_strtoupper($moduleDirName); //$capsDirName
+$moduleDirNameUpper = \mb_strtoupper($moduleDirName);
 
 /** @var \XoopsDatabase $db */
 /** @var Contact\Helper $helper */
@@ -60,8 +57,8 @@ if (!defined($moduleDirNameUpper . '_CONSTANTS_DEFINED')) {
     define($moduleDirNameUpper . '_CONSTANTS_DEFINED', 1);
 }
 
-$pathIcon16 = Admin::iconUrl('', 16);
-$pathIcon32 = Admin::iconUrl('', 32);
+$pathIcon16 = Admin::iconUrl('', '16');
+$pathIcon32 = Admin::iconUrl('', '32');
 //$pathModIcon16 = $helper->getModule()->getInfo('modicons16');
 //$pathModIcon32 = $helper->getModule()->getInfo('modicons32');
 
@@ -87,7 +84,7 @@ if (!isset($GLOBALS['xoopsTpl']) || !($GLOBALS['xoopsTpl'] instanceof \XoopsTpl)
     $GLOBALS['xoopsTpl'] = new \XoopsTpl();
 }
 
-$GLOBALS['xoopsTpl']->assign('mod_url', XOOPS_URL . '/modules/' . $moduleDirName);
+$GLOBALS['xoopsTpl']->assign('mod_url', $helper->url());
 // Local icons path
 if (is_object($helper->getModule())) {
     $pathModIcon16 = $helper->getModule()->getInfo('modicons16');

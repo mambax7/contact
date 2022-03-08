@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace XoopsModules\Contact;
 
@@ -15,12 +13,13 @@ namespace XoopsModules\Contact;
 */
 
 use Xmf\Request;
+use XoopsPersistableObjectHandler;
 
 /**
  * Contact module
  *
  * @copyright     XOOPS Project (https://xoops.org)
- * @license       http://www.fsf.org/copyleft/gpl.html GNU public license
+ * @license       https://www.fsf.org/copyleft/gpl.html GNU public license
  * @author        Kazumi Ono (aka Onokazu)
  * @author        Trabis <lusopoemas@gmail.com>
  * @author        Hossein Azizabadi (AKA Voltan)
@@ -30,11 +29,10 @@ use Xmf\Request;
 /**
  * Class ContactHandler
  */
-class ContactHandler extends \XoopsPersistableObjectHandler
+class ContactHandler extends XoopsPersistableObjectHandler
 {
     /**
      * ContactHandler constructor.
-     * @param null|\XoopsDatabase $db
      */
     public function __construct(\XoopsDatabase $db = null)
     {
@@ -103,7 +101,7 @@ class ContactHandler extends \XoopsPersistableObjectHandler
     /**
      * @return array
      */
-    public function contactInfoProcessing()
+    public function contactInfoProcessing(): array
     {
         $contact                       = [];
         $contact['contact_cid']        = Request::getInt('contact_id', 0, 'POST');
@@ -135,7 +133,7 @@ class ContactHandler extends \XoopsPersistableObjectHandler
      * @param $contact
      * @return string
      */
-    public function contactSendMail($contact)
+    public function contactSendMail($contact): string
     {
         $xoopsMailer = \xoops_getMailer();
         $xoopsMailer->useMail();
@@ -194,7 +192,7 @@ class ContactHandler extends \XoopsPersistableObjectHandler
      * @param $contact
      * @return string
      */
-    public function contactSendMailConfirm($contact)
+    public function contactSendMailConfirm($contact): string
     {
         $xoopsMailer = \xoops_getMailer();
         $xoopsMailer->useMail();
@@ -248,7 +246,7 @@ class ContactHandler extends \XoopsPersistableObjectHandler
      * @param $contact
      * @return string
      */
-    public function contactReplyMail($contact)
+    public function contactReplyMail($contact): string
     {
         $xoopsMailer = \xoops_getMailer();
         $xoopsMailer->useMail();
@@ -270,7 +268,7 @@ class ContactHandler extends \XoopsPersistableObjectHandler
      * @param null $department
      * @return array
      */
-    public function contactToEmails($department = null)
+    public function contactToEmails($department = null): array
     {
         //        global $xoopsConfig;
         $department_mail[] = \xoops_getModuleOption('contact_recipient_std', 'contact');
@@ -291,7 +289,7 @@ class ContactHandler extends \XoopsPersistableObjectHandler
      * @param $contact_id
      * @return bool
      */
-    public function contactAddReply($contact_id)
+    public function contactAddReply($contact_id): bool
     {
         $obj = $this->get($contact_id);
         $obj->setVar('contact_reply', 1);
@@ -314,7 +312,7 @@ class ContactHandler extends \XoopsPersistableObjectHandler
         $criteria = new \CriteriaCompo();
         $criteria->add(new \Criteria('contact_cid', $contact_id));
         $criteria->add(new \Criteria('contact_type', 'Contact'));
-        $contacts =& $this->getObjects($criteria, false);
+        $contacts = &$this->getObjects($criteria, false);
         if ($contacts) {
             $ret = [];
             /** @var Contact $root */
@@ -335,7 +333,7 @@ class ContactHandler extends \XoopsPersistableObjectHandler
      * @param $id
      * @return array
      */
-    public function contactGetAdminList($contact, $id)
+    public function contactGetAdminList($contact, $id): array
     {
         $ret      = [];
         $criteria = new \CriteriaCompo();
@@ -345,7 +343,7 @@ class ContactHandler extends \XoopsPersistableObjectHandler
         $criteria->setOrder($contact['order']);
         $criteria->setStart($contact['start']);
         $criteria->setLimit($contact['limit']);
-        $contacts =& $this->getObjects($criteria, false);
+        $contacts = &$this->getObjects($criteria, false);
         if ($contacts) {
             /** @var Contact $root */
             foreach ($contacts as $root) {
@@ -362,8 +360,8 @@ class ContactHandler extends \XoopsPersistableObjectHandler
 
     /**
      * Get file Count
-     * @param $id
-     * @return int
+     * @param int $id
+     * @return int|string
      */
     public function contactGetCount($id)
     {
@@ -386,7 +384,7 @@ class ContactHandler extends \XoopsPersistableObjectHandler
      * Contact Prune Count
      * @param $timestamp
      * @param $onlyreply
-     * @return int
+     * @return int|string
      */
     public function contactPruneCount($timestamp, $onlyreply)
     {
@@ -404,7 +402,7 @@ class ContactHandler extends \XoopsPersistableObjectHandler
      * @param $timestamp
      * @param $onlyreply
      */
-    public function contactDeleteBeforeDate($timestamp, $onlyreply)
+    public function contactDeleteBeforeDate($timestamp, $onlyreply): void
     {
         $criteria = new \CriteriaCompo();
         $criteria->add(new \Criteria('contact_create', $timestamp, '<='));
@@ -419,18 +417,16 @@ class ContactHandler extends \XoopsPersistableObjectHandler
      * @param $platform
      * @return string
      */
-    public function contactPlatform($platform)
+    public function contactPlatform($platform): string
     {
-        $platform = mb_strtolower($platform);
+        $platform = \mb_strtolower($platform);
         switch ($platform) {
             case 'Android':
                 $ret = 'Android';
                 break;
-
             case 'Ios':
                 $ret = 'Ios';
                 break;
-
             case 'Web':
             default:
                 $ret = 'Web';
@@ -445,18 +441,16 @@ class ContactHandler extends \XoopsPersistableObjectHandler
      * @param $type
      * @return string
      */
-    public function contactType($type)
+    public function contactType($type): string
     {
-        $type = mb_strtolower($type);
+        $type = \mb_strtolower($type);
         switch ($type) {
             case 'Mail':
                 $ret = 'Mail';
                 break;
-
             case 'Phone':
                 $ret = 'Phone';
                 break;
-
             case 'Contact':
             default:
                 $ret = 'Contact';
@@ -472,10 +466,10 @@ class ContactHandler extends \XoopsPersistableObjectHandler
      * @param null $timestamp
      * @return array
      */
-    public function contactLogs($column, $timestamp = null)
+    public function contactLogs($column, $timestamp = null): array
     {
         $ret = [];
-        if (!\in_array($column, ['contact_mail', 'contact_url', 'contact_phone'])) {
+        if (!\in_array($column, ['contact_mail', 'contact_url', 'contact_phone'], true)) {
             return $ret;
         }
         $criteria = new \CriteriaCompo();
@@ -485,7 +479,7 @@ class ContactHandler extends \XoopsPersistableObjectHandler
         }
         $criteria->setSort('contact_create');
         $criteria->setOrder('DESC');
-        $contacts =& $this->getObjects($criteria, false);
+        $contacts = &$this->getObjects($criteria, false);
         if ($contacts) {
             /** @var Contact $root */
             foreach ($contacts as $root) {

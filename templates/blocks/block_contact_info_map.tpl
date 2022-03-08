@@ -1,5 +1,5 @@
 <i id='contact'></i>
-<link rel="stylesheet" href='<{xoAppUrl}>modules/contact/assets/css/contact.css' type="text/css" property=""/>
+<link rel="stylesheet" href='<{xoAppUrl}>modules/contact/assets/css/contact.css' type="text/css" property="">
 
 <{if $block.info}>
 <div class="row center bg-contact" style="padding-bottom: 20px; padding-top: 5px;">

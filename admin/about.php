@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -15,7 +13,7 @@ declare(strict_types=1);
  * Contact module
  *
  * @copyright   XOOPS Project (https://xoops.org)
- * @license     http://www.fsf.org/copyleft/gpl.html GNU public license
+ * @license     https://www.fsf.org/copyleft/gpl.html GNU public license
  * @author      Kazumi Ono (aka Onokazu)
  * @author      Trabis <lusopoemas@gmail.com>
  * @author      Hossein Azizabadi (AKA Voltan)
@@ -25,7 +23,6 @@ declare(strict_types=1);
 use Xmf\Module\Admin;
 
 /** @var Admin $adminObject */
-
 require_once __DIR__ . '/admin_header.php';
 xoops_cp_header();
 

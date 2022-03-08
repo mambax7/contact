@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -15,8 +13,7 @@ declare(strict_types=1);
  * Contact module for xoops
  *
  * @copyright       XOOPS Project (https://xoops.org)
- * @license         GPL 2.0 or later
- * @package         wgsitenotice
+ * @license         GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
  * @since           1.0
  * @min_xoops       2.5.7
  * @author          Goffy (wedega.com) - Email:<webmaster@wedega.com> - Website:<https://wedega.com>
@@ -27,6 +24,7 @@ declare(strict_types=1);
 use XoopsModules\Contact\{
     Helper
 };
+
 /** @var Helper $helper */
 
 // Function show block form only
@@ -71,7 +69,7 @@ function block_contact_form_map_show($options): array
 /**
  * @param $block
  */
-function contactGetElements(&$block)
+function contactGetElements(&$block): void
 {
     $helper = Helper::getInstance();
     $helper->loadLanguage('main');

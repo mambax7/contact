@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 // Module Info
 // The name of this module
 define('_MI_CONTACT_NAME', 'Kontakt');
@@ -34,12 +32,15 @@ define('_MI_CONTACT_FORM_ADDRESS_DESC', '');
 define('_MI_CONTACT_FORM_DEPT', 'Auswahl für Abteilungen anzeigen');
 define('_MI_CONTACT_FORM_DEPT_DESC', '');
 define('_MI_CONTACT_DEPT', 'Abteilungen/Empfänger');
-define('_MI_CONTACT_DEPT_DESC', 'Diese Option erlaubt die Angabe/Kombination von verschiedenen Abteilungen/Empfängern.<br>'
-                                . 'Je nach Benutzerauswahl erhält die entsprechende Abteilung die jeweilige Kontaktinformation an die dafür definierte E-Mail-Adresse.<br><br>'
-                                . 'Definiere jede Abteilung/E-Mail wie folgt:<br><br>'
-                                . "abteilung1,email1|abteilung2,email2|abteilung3,email3 etc. - jede Abteilung muss von der E-Mail mit einem Beistrich ',' getrennt sein,<br>"
-                                . "und jede Kombination Abteilung/E-Mail muss durch einen Strich '|' getrennt sein.<br><br>"
-                                . 'Wenn keine Abteilung/kein Empfänger angegeben wird, wird die Mailnachricht an die Standard-E-Mail-Adresse versendet.');
+define(
+    '_MI_CONTACT_DEPT_DESC',
+    'Diese Option erlaubt die Angabe/Kombination von verschiedenen Abteilungen/Empfängern.<br>'
+    . 'Je nach Benutzerauswahl erhält die entsprechende Abteilung die jeweilige Kontaktinformation an die dafür definierte E-Mail-Adresse.<br><br>'
+    . 'Definiere jede Abteilung/E-Mail wie folgt:<br><br>'
+    . "abteilung1,email1|abteilung2,email2|abteilung3,email3 etc. - jede Abteilung muss von der E-Mail mit einem Beistrich ',' getrennt sein,<br>"
+    . "und jede Kombination Abteilung/E-Mail muss durch einen Strich '|' getrennt sein.<br><br>"
+    . 'Wenn keine Abteilung/kein Empfänger angegeben wird, wird die Mailnachricht an die Standard-E-Mail-Adresse versendet.'
+);
 define('_MI_CONTACT_PERPAGE', 'Anfragen pro Seite');
 define('_MI_CONTACT_PERPAGE_DESC', '');
 define('_MI_CONTACT_TOPINFO', 'Überschrift des Kontaktformulars');
@@ -87,7 +88,7 @@ define('_MI_CONTACT_DEFAULT_DESC', 'Hier können die Kontaktdaten angegeben werd
 //2.25 RC1
 //Help
 define('_MI_CONTACT_DIRNAME', basename(dirname(__DIR__, 2)));
-define('_MI_CONTACT_HELP_HEADER', __DIR__.'/help/helpheader.tpl');
+define('_MI_CONTACT_HELP_HEADER', __DIR__ . '/help/helpheader.tpl');
 define('_MI_CONTACT_BACK_2_ADMIN', 'Back to Administration of ');
 define('_MI_CONTACT_OVERVIEW', 'Overview');
 

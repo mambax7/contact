@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 /*
  You may not change or alter any portion of this comment or credits
  of supporting developers from this source code or any supporting source code
@@ -15,13 +13,14 @@ declare(strict_types=1);
  * Contact module
  *
  * @copyright   XOOPS Project (https://xoops.org)
- * @license     http://www.fsf.org/copyleft/gpl.html GNU public license
+ * @license     https://www.fsf.org/copyleft/gpl.html GNU public license
  * @author      Kazumi Ono (aka Onokazu)
  * @author      Trabis <lusopoemas@gmail.com>
  * @author      Hossein Azizabadi (AKA Voltan)
  */
 
 use Xmf\Request;
+
 /** @var ContactHandler $contactHandler */
 /** @var Admin $adminObject */
 
@@ -47,7 +46,7 @@ switch ($op) {
     case 'prune':
         $timestamp = Request::getInt('prune_date', '');
         $onlyreply = Request::getInt('onlyreply', 0);
-        $timestamp = strtotime($timestamp);
+        $timestamp = strtotime((string)$timestamp);
         $count     = $contactHandler->contactPruneCount($timestamp, $onlyreply);
         $contactHandler->contactDeleteBeforeDate($timestamp, $onlyreply);
         redirect_header('tools.php', 1, sprintf(_AM_CONTACT_MSG_PRUNE_DELETED, $count));

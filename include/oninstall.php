@@ -1,6 +1,4 @@
-<?php
-
-declare(strict_types=1);
+<?php declare(strict_types=1);
 /*
  * You may not change or alter any portion of this comment or credits
  * of supporting developers from this source code or any supporting source code
@@ -13,8 +11,8 @@ declare(strict_types=1);
 
 /**
  * @copyright    XOOPS Project (https://xoops.org)
- * @license      GNU GPL 2 or later (https://www.gnu.org/licenses/gpl-2.0.html)
- * @author      XOOPS Development Team
+ * @license      GNU GPL 2.0 or later (https://www.gnu.org/licenses/gpl-2.0.html)
+ * @author       XOOPS Development Team
  */
 
 use XoopsModules\Contact;
@@ -32,7 +30,7 @@ use XoopsModules\Contact\Utility;
 function xoops_module_pre_install_contact(\XoopsModule $module)
 {
     $moduleDirName = \basename(\dirname(__DIR__));
-    $utility = new Utility();
+    $utility       = new Utility();
 
     $xoopsSuccess = $utility::checkVerXoops($module);
     $phpSuccess   = $utility::checkVerPhp($module);
@@ -55,7 +53,7 @@ function xoops_module_pre_install_contact(\XoopsModule $module)
  */
 function xoops_module_install_contact(\XoopsModule $module)
 {
-    require dirname(__DIR__, 3) . '/mainfile.php';
+    require \dirname(__DIR__, 3) . '/mainfile.php';
 
     $moduleDirName = \basename(\dirname(__DIR__));
 
@@ -89,7 +87,7 @@ function xoops_module_install_contact(\XoopsModule $module)
 
     //  ---  COPY blank.png FILES ---------------
     if (count($configurator->copyBlankFiles) > 0) {
-        $file = dirname(__DIR__) . '/assets/images/blank.png';
+        $file = \dirname(__DIR__) . '/assets/images/blank.png';
         foreach (array_keys($configurator->copyBlankFiles) as $i) {
             $dest = $configurator->copyBlankFiles[$i] . '/blank.png';
             $utility::copyFile($file, $dest);

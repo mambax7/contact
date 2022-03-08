@@ -27,7 +27,7 @@ Read Me First
  and install it via xoops modules administration panel. You can  configure
  it through Contact module control panel.
  Detailed instructions on installing modules are available in the
- XOOPS Operations Manual (http://goo.gl/adT2i)
+ XOOPS Operations Manual (https://goo.gl/adT2i)
 
  5. Tutorial
 _____________________________________________________________________
