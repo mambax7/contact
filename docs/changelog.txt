@@ -1,4 +1,8 @@
-<h5>2.27 RC-1 NOT RELEASED</h5>
+<h5>2.27.0 RC-2 [2022-02-20]</h5>
+<hr>
++ index.html in /preloads (mamba)
+
+<h5>2.27.0 RC-1 [2021-08-09]</h5>
 <hr>
 + fixed bug for default sender mail address, if there are no departments (goffy)
 + fixed bug with missing contact_skype in database (goffy)
