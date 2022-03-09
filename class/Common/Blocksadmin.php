@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace XoopsModules\xxxxx\Common;
+namespace XoopsModules\Contact\Common;
 
 /**
  * You may not change or alter any portion of this comment or credits
