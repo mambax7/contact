@@ -12,11 +12,11 @@
     <tbody class="xo-contact">
     <{foreach item=contact from=$replylist}>
     <tr class="odd" id="mod_<{$contact.contact_id}>">
-        <td class="txtcenter bold"><a class="tooltip" title="<{$contact.contact_subject}>" href="main.php?op=view&amp;id=<{$contact.contact_id}>"><{$contact.contact_subject}></a>
+        <td class="txtcenter bold"><a class="tooltip" title="<{$contact.contact_subject|escape}>" href="main.php?op=view&amp;id=<{$contact.contact_id}>"><{$contact.contact_subject|escape}></a>
         </td>
-        <td class="txtcenter width10"><{$contact.contact_create}></td>
-        <td class="txtcenter width15"><{$contact.contact_name}> ( <{if $contact.contact_uid}><a title="<{$contact.contact_owner}>"
-                                                                                                href="<{$xoops_url}>/userinfo.php?uid=<{$contact.contact_uid}>"><{$contact.contact_owner}></a><{else}><{$contact.contact_owner}><{/if}>
+        <td class="txtcenter width10"><{$contact.contact_create|escape}></td>
+        <td class="txtcenter width15"><{$contact.contact_name|escape}> ( <{if $contact.contact_uid}><a title="<{$contact.contact_owner|escape}>"
+                                                                                                href="<{$xoops_url}>/userinfo.php?uid=<{$contact.contact_uid}>"><{$contact.contact_owner|escape}></a><{else}><{$contact.contact_owner|escape}><{/if}>
             )
         </td>
         <td class="txtcenter width15 xo-actions">
@@ -32,31 +32,31 @@
     </tbody>
 </table>
 <{foreach item=contact from=$replylist}>
-<div id="dialog<{$contact.contact_id}>" title="<{$contact.contact_subject}>" style='display:none;'>
+<div id="dialog<{$contact.contact_id}>" title="<{$contact.contact_subject|escape}>" style='display:none;'>
     <div class="marg5 pad5 ui-state-default ui-corner-all">
-        <{$smarty.const._AM_CONTACT_SUBJECT}> : <span class="bold"><{$contact.contact_subject}></span>
+        <{$smarty.const._AM_CONTACT_SUBJECT}> : <span class="bold"><{$contact.contact_subject|escape}></span>
     </div>
     <div class="marg5 pad5 ui-state-highlight ui-corner-all">
         <div class="pad5">
-            <span class="bold"><{$smarty.const._AM_CONTACT_DEPARTMENT}> : </span><{$contact.contact_department}> |
-            <span class="bold"><{$smarty.const._AM_CONTACT_SUBMITTER}> : </span><{$contact.contact_name}> ( <{if $contact.contact_uid}><a
-                title="<{$contact.contact_owner}>" href="<{$xoops_url}>/userinfo.php?uid=<{$contact.contact_uid}>"><{$contact.contact_owner}></a><{else}><{$contact.contact_owner}><{/if}>
+            <span class="bold"><{$smarty.const._AM_CONTACT_DEPARTMENT}> : </span><{$contact.contact_department|escape}> |
+            <span class="bold"><{$smarty.const._AM_CONTACT_SUBMITTER}> : </span><{$contact.contact_name|escape}> ( <{if $contact.contact_uid}><a
+                title="<{$contact.contact_owner|escape}>" href="<{$xoops_url}>/userinfo.php?uid=<{$contact.contact_uid}>"><{$contact.contact_owner|escape}></a><{else}><{$contact.contact_owner|escape}><{/if}>
             ) |
-            <span class="bold"><{$smarty.const._AM_CONTACT_DATE}> : </span><{$contact.contact_create}> |
-            <{if $contact.contact_phone}><span class="bold"><{$smarty.const._AM_CONTACT_PHONE}> : </span><{$contact.contact_phone}> | <{/if}>
-            <{if $contact.contact_mail}><span class="bold"><{$smarty.const._AM_CONTACT_EMAIL}> : </span><{$contact.contact_mail}> | <{/if}>
-            <{if $contact.contact_icq}><span class="bold"><{$smarty.const._AM_CONTACT_ICQ}> : </span><{$contact.contact_icq}> | <{/if}>
-            <{if $contact.contact_skype}><span class="bold"><{$smarty.const._AM_CONTACT_SKYPE}> : </span><{$contact.contact_skype}> | <{/if}>
-            <{if $contact.contact_company}><span class="bold"><{$smarty.const._AM_CONTACT_COMPANY}> : </span><{$contact.contact_company}> | <{/if}>
-            <{if $contact.contact_location}><span class="bold"><{$smarty.const._AM_CONTACT_LOCATION}> : </span><{$contact.contact_location}> | <{/if}>
+            <span class="bold"><{$smarty.const._AM_CONTACT_DATE}> : </span><{$contact.contact_create|escape}> |
+            <{if $contact.contact_phone}><span class="bold"><{$smarty.const._AM_CONTACT_PHONE}> : </span><{$contact.contact_phone|escape}> | <{/if}>
+            <{if $contact.contact_mail}><span class="bold"><{$smarty.const._AM_CONTACT_EMAIL}> : </span><{$contact.contact_mail|escape}> | <{/if}>
+            <{if $contact.contact_icq}><span class="bold"><{$smarty.const._AM_CONTACT_ICQ}> : </span><{$contact.contact_icq|escape}> | <{/if}>
+            <{if $contact.contact_skype}><span class="bold"><{$smarty.const._AM_CONTACT_SKYPE}> : </span><{$contact.contact_skype|escape}> | <{/if}>
+            <{if $contact.contact_company}><span class="bold"><{$smarty.const._AM_CONTACT_COMPANY}> : </span><{$contact.contact_company|escape}> | <{/if}>
+            <{if $contact.contact_location}><span class="bold"><{$smarty.const._AM_CONTACT_LOCATION}> : </span><{$contact.contact_location|escape}> | <{/if}>
             <{if $contact.contact_url}><span class="bold"><{$smarty.const._AM_CONTACT_URL}> : </span><a title="<{$smarty.const._AM_CONTACT_VIEWURL}>"
-                                                                                                        href="<{$contact.contact_url}>"><{$smarty.const._AM_CONTACT_VIEWURL}></a>
+                                                                                                        href="<{$contact.contact_url|escape}>"><{$smarty.const._AM_CONTACT_VIEWURL}></a>
             | <{/if}>
-            <{if $contact.contact_address}><span class="bold"><{$smarty.const._AM_CONTACT_ADDRESS}> : </span><{$contact.contact_address}> | <{/if}>
+            <{if $contact.contact_address}><span class="bold"><{$smarty.const._AM_CONTACT_ADDRESS}> : </span><{$contact.contact_address|escape}> | <{/if}>
         </div>
         <div class="clear"></div>
     </div>
-    <div class="pad5"><span class="bold"><{$smarty.const._AM_CONTACT_MESSAGE}> : </span><{$contact.contact_message}></div>
+    <div class="pad5"><span class="bold"><{$smarty.const._AM_CONTACT_MESSAGE}> : </span><{$contact.contact_message|escape}></div>
 </div>
 <{/foreach}>
 <{/if}>
@@ -74,78 +74,78 @@
     <tbody class="xo-contact">
     <tr class="odd">
         <td class="bold"><{$smarty.const._AM_CONTACT_SUBJECT}></td>
-        <td><{$contact.contact_subject}> ( <span class="pad2 bold red"><{$contact.contact_platform}></span> )</td>
+        <td><{$contact.contact_subject|escape}> ( <span class="pad2 bold red"><{$contact.contact_platform|escape}></span> )</td>
     </tr>
     <tr class="odd">
         <td class="bold"><{$smarty.const._AM_CONTACT_SUBMITTER}></td>
-        <td><{$contact.contact_name}> ( <{if $contact.contact_uid}><a title="<{$contact.contact_owner}>"
-                                                                      href="<{$xoops_url}>/userinfo.php?uid=<{$contact.contact_uid}>"><{$contact.contact_owner}></a><{else}><{$contact.contact_owner}><{/if}>
+        <td><{$contact.contact_name|escape}> ( <{if $contact.contact_uid}><a title="<{$contact.contact_owner|escape}>"
+                                                                      href="<{$xoops_url}>/userinfo.php?uid=<{$contact.contact_uid}>"><{$contact.contact_owner|escape}></a><{else}><{$contact.contact_owner|escape}><{/if}>
             )
         </td>
     </tr>
     <tr class="odd">
         <td class="bold"><{$smarty.const._AM_CONTACT_DEPARTMENT}></td>
-        <td><{$contact.contact_department}></td>
+        <td><{$contact.contact_department|escape}></td>
     </tr>
     <tr class="odd">
         <td class="bold"><{$smarty.const._AM_CONTACT_EMAIL}></td>
-        <td><{$contact.contact_mail}></td>
+        <td><{$contact.contact_mail|escape}></td>
     </tr>
     <{if $contact.contact_url}>
     <tr class="odd">
         <td class="bold"><{$smarty.const._AM_CONTACT_URL}></td>
-        <td><span class="pad5 xo-actions"><a title="<{$smarty.const._AM_CONTACT_VIEWURL}>" href="<{$contact.contact_url}>"><img
-                src="<{xoAdminIcons url.png}>" alt="<{$smarty.const._AM_CONTACT_VIEWURL}>"></a></span> <{$contact.contact_url}>
+        <td><span class="pad5 xo-actions"><a title="<{$smarty.const._AM_CONTACT_VIEWURL}>" href="<{$contact.contact_url|escape}>"><img
+                src="<{xoAdminIcons url.png}>" alt="<{$smarty.const._AM_CONTACT_VIEWURL}>"></a></span> <{$contact.contact_url|escape}>
         </td>
     </tr>
     <{/if}>
     <tr class="odd">
         <td class="bold"><{$smarty.const._AM_CONTACT_DATE}></td>
-        <td><{$contact.contact_create}></td>
+        <td><{$contact.contact_create|escape}></td>
     </tr>
     <{if $contact.contact_icq}>
     <tr class="odd">
         <td class="bold"><{$smarty.const._AM_CONTACT_ICQ}></td>
-        <td><{$contact.contact_icq}></td>
+        <td><{$contact.contact_icq|escape}></td>
     </tr>
     <{/if}>
     <{if $contact.contact_skype}>
     <tr class="odd">
         <td class="bold"><{$smarty.const._AM_CONTACT_SKYPE}></td>
-        <td><{$contact.contact_skype}></td>
+        <td><{$contact.contact_skype|escape}></td>
     </tr>
     <{/if}>
     <{if $contact.contact_company}>
     <tr class="odd">
         <td class="bold"><{$smarty.const._AM_CONTACT_COMPANY}></td>
-        <td><{$contact.contact_company}></td>
+        <td><{$contact.contact_company|escape}></td>
     </tr>
     <{/if}>
     <{if $contact.contact_location}>
     <tr class="odd">
         <td class="bold"><{$smarty.const._AM_CONTACT_LOCATION}></td>
-        <td><{$contact.contact_location}></td>
+        <td><{$contact.contact_location|escape}></td>
     </tr>
     <{/if}>
     <{if $contact.contact_phone}>
     <tr class="odd">
         <td class="bold"><{$smarty.const._AM_CONTACT_PHONE}></td>
-        <td><{$contact.contact_phone}></td>
+        <td><{$contact.contact_phone|escape}></td>
     </tr>
     <{/if}>
     <{if $contact.contact_address}>
     <tr class="odd">
         <td class="bold"><{$smarty.const._AM_CONTACT_ADDRESS}></td>
-        <td><{$contact.contact_address}></td>
+        <td><{$contact.contact_address|escape}></td>
     </tr>
     <{/if}>
     <tr class="odd">
         <td class="bold"><{$smarty.const._AM_CONTACT_IP}></td>
-        <td><{$contact.contact_ip}></td>
+        <td><{$contact.contact_ip|escape}></td>
     </tr>
     <tr class="odd">
         <td class="bold"><{$smarty.const._AM_CONTACT_MESSAGE}></td>
-        <td><{$contact.contact_message}></td>
+        <td><{$contact.contact_message|escape}></td>
     </tr>
     <{if $contact.contact_cid == 0}>
     <tr class="odd">
@@ -172,11 +172,11 @@
     <tbody class="xo-contact">
     <{foreach item=contact from=$replylist}>
     <tr class="odd" id="mod_<{$contact.contact_id}>">
-        <td class="txtcenter bold"><a class="tooltip" title="<{$contact.contact_subject}>" href="main.php?op=view&amp;id=<{$contact.contact_id}>"><{$contact.contact_subject}></a>
+        <td class="txtcenter bold"><a class="tooltip" title="<{$contact.contact_subject|escape}>" href="main.php?op=view&amp;id=<{$contact.contact_id}>"><{$contact.contact_subject|escape}></a>
         </td>
-        <td class="txtcenter width10"><{$contact.contact_create}></td>
-        <td class="txtcenter width15"><{$contact.contact_name}> ( <{if $contact.contact_uid}><a title="<{$contact.contact_owner}>"
-                                                                                                href="<{$xoops_url}>/userinfo.php?uid=<{$contact.contact_uid}>"><{$contact.contact_owner}></a><{else}><{$contact.contact_owner}><{/if}>
+        <td class="txtcenter width10"><{$contact.contact_create|escape}></td>
+        <td class="txtcenter width15"><{$contact.contact_name|escape}> ( <{if $contact.contact_uid}><a title="<{$contact.contact_owner|escape}>"
+                                                                                                href="<{$xoops_url}>/userinfo.php?uid=<{$contact.contact_uid}>"><{$contact.contact_owner|escape}></a><{else}><{$contact.contact_owner|escape}><{/if}>
             )
         </td>
         <td class="txtcenter width15 xo-actions">
@@ -192,30 +192,30 @@
     </tbody>
 </table>
 <{foreach item=contact from=$replylist}>
-<div id="dialog<{$contact.contact_id}>" title="<{$contact.contact_subject}>" style='display:none;'>
+<div id="dialog<{$contact.contact_id}>" title="<{$contact.contact_subject|escape}>" style='display:none;'>
     <div class="marg5 pad5 ui-state-default ui-corner-all">
-        <{$smarty.const._AM_CONTACT_SUBJECT}> : <span class="bold"><{$contact.contact_subject}></span>
+        <{$smarty.const._AM_CONTACT_SUBJECT}> : <span class="bold"><{$contact.contact_subject|escape}></span>
     </div>
     <div class="marg5 pad5 ui-state-highlight ui-corner-all">
         <div class="pad5">
-            <span class="bold"><{$smarty.const._AM_CONTACT_DEPARTMENT}> : </span><{$contact.contact_department}> |
-            <span class="bold"><{$smarty.const._AM_CONTACT_SUBMITTER}> : </span><{$contact.contact_name}> ( <{if $contact.contact_uid}><a
-                title="<{$contact.contact_owner}>" href="<{$xoops_url}>/userinfo.php?uid=<{$contact.contact_uid}>"><{$contact.contact_owner}></a><{else}><{$contact.contact_owner}><{/if}>
+            <span class="bold"><{$smarty.const._AM_CONTACT_DEPARTMENT}> : </span><{$contact.contact_department|escape}> |
+            <span class="bold"><{$smarty.const._AM_CONTACT_SUBMITTER}> : </span><{$contact.contact_name|escape}> ( <{if $contact.contact_uid}><a
+                title="<{$contact.contact_owner|escape}>" href="<{$xoops_url}>/userinfo.php?uid=<{$contact.contact_uid}>"><{$contact.contact_owner|escape}></a><{else}><{$contact.contact_owner|escape}><{/if}>
             ) |
-            <span class="bold"><{$smarty.const._AM_CONTACT_DATE}> : </span><{$contact.contact_create}> |
-            <{if $contact.contact_phone}><span class="bold"><{$smarty.const._AM_CONTACT_PHONE}> : </span><{$contact.contact_phone}> | <{/if}>
-            <{if $contact.contact_mail}><span class="bold"><{$smarty.const._AM_CONTACT_EMAIL}> : </span><{$contact.contact_mail}> | <{/if}>
-            <{if $contact.contact_icq}><span class="bold"><{$smarty.const._AM_CONTACT_ICQ}> : </span><{$contact.contact_icq}> | <{/if}>
-            <{if $contact.contact_company}><span class="bold"><{$smarty.const._AM_CONTACT_COMPANY}> : </span><{$contact.contact_company}> | <{/if}>
-            <{if $contact.contact_location}><span class="bold"><{$smarty.const._AM_CONTACT_LOCATION}> : </span><{$contact.contact_location}> | <{/if}>
+            <span class="bold"><{$smarty.const._AM_CONTACT_DATE}> : </span><{$contact.contact_create|escape}> |
+            <{if $contact.contact_phone}><span class="bold"><{$smarty.const._AM_CONTACT_PHONE}> : </span><{$contact.contact_phone|escape}> | <{/if}>
+            <{if $contact.contact_mail}><span class="bold"><{$smarty.const._AM_CONTACT_EMAIL}> : </span><{$contact.contact_mail|escape}> | <{/if}>
+            <{if $contact.contact_icq}><span class="bold"><{$smarty.const._AM_CONTACT_ICQ}> : </span><{$contact.contact_icq|escape}> | <{/if}>
+            <{if $contact.contact_company}><span class="bold"><{$smarty.const._AM_CONTACT_COMPANY}> : </span><{$contact.contact_company|escape}> | <{/if}>
+            <{if $contact.contact_location}><span class="bold"><{$smarty.const._AM_CONTACT_LOCATION}> : </span><{$contact.contact_location|escape}> | <{/if}>
             <{if $contact.contact_url}><span class="bold"><{$smarty.const._AM_CONTACT_URL}> : </span><a title="<{$smarty.const._AM_CONTACT_VIEWURL}>"
-                                                                                                        href="<{$contact.contact_url}>"><{$smarty.const._AM_CONTACT_VIEWURL}></a>
+                                                                                                        href="<{$contact.contact_url|escape}>"><{$smarty.const._AM_CONTACT_VIEWURL}></a>
             | <{/if}>
-            <{if $contact.contact_address}><span class="bold"><{$smarty.const._AM_CONTACT_ADDRESS}> : </span><{$contact.contact_address}> | <{/if}>
+            <{if $contact.contact_address}><span class="bold"><{$smarty.const._AM_CONTACT_ADDRESS}> : </span><{$contact.contact_address|escape}> | <{/if}>
         </div>
         <div class="clear"></div>
     </div>
-    <div class="pad5"><span class="bold"><{$smarty.const._AM_CONTACT_MESSAGE}> : </span><{$contact.contact_message}></div>
+    <div class="pad5"><span class="bold"><{$smarty.const._AM_CONTACT_MESSAGE}> : </span><{$contact.contact_message|escape}></div>
 </div>
 <{/foreach}>
 <{/if}>
@@ -223,7 +223,7 @@
 <{elseif $level == 'delete'}>
 
 <{else}>
-<{$navigation}>
+<{$navigation|default:''}>
 <table class="outer">
     <thead>
     <th><{$smarty.const._AM_CONTACT_SUBJECT}></th>
@@ -236,15 +236,15 @@
     <tbody class="xo-contact">
     <{foreach item=contact from=$contacts}>
     <tr class="odd" id="mod_<{$contact.contact_id}>">
-        <td class="bold"><a class="tooltip" title="<{$contact.contact_subject}>" href="main.php?op=view&amp;id=<{$contact.contact_id}>"><{$contact.contact_subject}></a>
+        <td class="bold"><a class="tooltip" title="<{$contact.contact_subject|escape}>" href="main.php?op=view&amp;id=<{$contact.contact_id}>"><{$contact.contact_subject|escape}></a>
         </td>
         <td class="txtcenter width10 bold"><{if $contact.contact_reply}><span class="green bold pad2"><{$smarty.const._AM_CONTACT_HAVEREPLY}></span><{else}><span
                 class="red bold pad2"><{$smarty.const._AM_CONTACT_HAVENTREPLY}></span><{/if}>
         </td>
-        <td class="txtcenter width10"><{$contact.contact_create}></td>
-        <td class="txtcenter width15 bold"><{$contact.contact_department}></td>
-        <td class="txtcenter width15"><{$contact.contact_name}> ( <{if $contact.contact_uid}><a title="<{$contact.contact_owner}>"
-                                                                                                href="<{$xoops_url}>/userinfo.php?uid=<{$contact.contact_uid}>"><{$contact.contact_owner}></a><{else}><{$contact.contact_owner}><{/if}>
+        <td class="txtcenter width10"><{$contact.contact_create|escape}></td>
+        <td class="txtcenter width15 bold"><{$contact.contact_department|escape}></td>
+        <td class="txtcenter width15"><{$contact.contact_name|escape}> ( <{if $contact.contact_uid}><a title="<{$contact.contact_owner|escape}>"
+                                                                                                href="<{$xoops_url}>/userinfo.php?uid=<{$contact.contact_uid}>"><{$contact.contact_owner|escape}></a><{else}><{$contact.contact_owner|escape}><{/if}>
             )
         </td>
         <td class="txtcenter width15 xo-actions">
@@ -263,30 +263,30 @@
 </table>
 
 <{foreach item=contact from=$contacts}>
-<div id="dialog<{$contact.contact_id}>" title="<{$contact.contact_subject}>" style='display:none;'>
+<div id="dialog<{$contact.contact_id}>" title="<{$contact.contact_subject|escape}>" style='display:none;'>
     <div class="marg5 pad5 ui-state-default ui-corner-all">
-        <{$smarty.const._AM_CONTACT_SUBJECT}> : <span class="bold"><{$contact.contact_subject}></span>
+        <{$smarty.const._AM_CONTACT_SUBJECT}> : <span class="bold"><{$contact.contact_subject|escape}></span>
     </div>
     <div class="marg5 pad5 ui-state-highlight ui-corner-all">
         <div class="pad5">
-            <span class="bold"><{$smarty.const._AM_CONTACT_DEPARTMENT}> : </span><{$contact.contact_department}> |
-            <span class="bold"><{$smarty.const._AM_CONTACT_SUBMITTER}> : </span><{$contact.contact_name}> ( <{if $contact.contact_uid}><a
-                title="<{$contact.contact_owner}>" href="<{$xoops_url}>/userinfo.php?uid=<{$contact.contact_uid}>"><{$contact.contact_owner}></a><{else}><{$contact.contact_owner}><{/if}>
+            <span class="bold"><{$smarty.const._AM_CONTACT_DEPARTMENT}> : </span><{$contact.contact_department|escape}> |
+            <span class="bold"><{$smarty.const._AM_CONTACT_SUBMITTER}> : </span><{$contact.contact_name|escape}> ( <{if $contact.contact_uid}><a
+                title="<{$contact.contact_owner|escape}>" href="<{$xoops_url}>/userinfo.php?uid=<{$contact.contact_uid}>"><{$contact.contact_owner|escape}></a><{else}><{$contact.contact_owner|escape}><{/if}>
             ) |
-            <span class="bold"><{$smarty.const._AM_CONTACT_DATE}> : </span><{$contact.contact_create}> |
-            <{if $contact.contact_phone}><span class="bold"><{$smarty.const._AM_CONTACT_PHONE}> : </span><{$contact.contact_phone}> | <{/if}>
-            <{if $contact.contact_mail}><span class="bold"><{$smarty.const._AM_CONTACT_EMAIL}> : </span><{$contact.contact_mail}> | <{/if}>
-            <{if $contact.contact_icq}><span class="bold"><{$smarty.const._AM_CONTACT_ICQ}> : </span><{$contact.contact_icq}> | <{/if}>
-            <{if $contact.contact_company}><span class="bold"><{$smarty.const._AM_CONTACT_COMPANY}> : </span><{$contact.contact_company}> | <{/if}>
-            <{if $contact.contact_location}><span class="bold"><{$smarty.const._AM_CONTACT_LOCATION}> : </span><{$contact.contact_location}> | <{/if}>
+            <span class="bold"><{$smarty.const._AM_CONTACT_DATE}> : </span><{$contact.contact_create|escape}> |
+            <{if $contact.contact_phone}><span class="bold"><{$smarty.const._AM_CONTACT_PHONE}> : </span><{$contact.contact_phone|escape}> | <{/if}>
+            <{if $contact.contact_mail}><span class="bold"><{$smarty.const._AM_CONTACT_EMAIL}> : </span><{$contact.contact_mail|escape}> | <{/if}>
+            <{if $contact.contact_icq}><span class="bold"><{$smarty.const._AM_CONTACT_ICQ}> : </span><{$contact.contact_icq|escape}> | <{/if}>
+            <{if $contact.contact_company}><span class="bold"><{$smarty.const._AM_CONTACT_COMPANY}> : </span><{$contact.contact_company|escape}> | <{/if}>
+            <{if $contact.contact_location}><span class="bold"><{$smarty.const._AM_CONTACT_LOCATION}> : </span><{$contact.contact_location|escape}> | <{/if}>
             <{if $contact.contact_url}><span class="bold"><{$smarty.const._AM_CONTACT_URL}> : </span><a title="<{$smarty.const._AM_CONTACT_VIEWURL}>"
-                                                                                                        href="<{$contact.contact_url}>"><{$smarty.const._AM_CONTACT_VIEWURL}></a>
+                                                                                                        href="<{$contact.contact_url|escape}>"><{$smarty.const._AM_CONTACT_VIEWURL}></a>
             | <{/if}>
-            <{if $contact.contact_address}><span class="bold"><{$smarty.const._AM_CONTACT_ADDRESS}> : </span><{$contact.contact_address}> | <{/if}>
+            <{if $contact.contact_address}><span class="bold"><{$smarty.const._AM_CONTACT_ADDRESS}> : </span><{$contact.contact_address|escape}> | <{/if}>
         </div>
         <div class="clear"></div>
     </div>
-    <div class="pad5"><span class="bold"><{$smarty.const._AM_CONTACT_MESSAGE}> : </span><{$contact.contact_message}></div>
+    <div class="pad5"><span class="bold"><{$smarty.const._AM_CONTACT_MESSAGE}> : </span><{$contact.contact_message|escape}></div>
 </div>
 <{/foreach}>
 

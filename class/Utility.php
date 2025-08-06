@@ -105,4 +105,19 @@ class Utility extends Common\SysUtility
     //
     //        return $success;
     //    }
+
+    /**
+     * @param $dirname
+     */
+    public function convertToInnoDB($dirname)
+    {
+        $xoopsDB = \XoopsDatabaseFactory::getDatabaseConnection();
+        $sql = "SELECT ENGINE FROM information_schema.TABLES WHERE TABLE_SCHEMA = '" . XOOPS_DB_NAME . "' AND TABLE_NAME = '" . $xoopsDB->prefix('contact') . "'";
+        $result = $xoopsDB->query($sql);
+        $row = $xoopsDB->fetchRow($result);
+        if ('myisam' === strtolower($row[0])) {
+            $sql = 'ALTER TABLE ' . $xoopsDB->prefix('contact') . ' ENGINE=InnoDB';
+            $xoopsDB->queryF($sql);
+        }
+    }
 }

@@ -70,6 +70,8 @@ define('_MI_CONTACT_HEAD_DEPT', 'Optionen für die Verwendung von Abteilungen');
 define('_MI_CONTACT_HEAD_MISC', 'Sonstige Optionen');
 define('_MI_CONTACT_MAIL_CONFIRM', 'Bestätigungsmail senden?');
 define('_MI_CONTACT_MAIL_CONFIRM_DESC', 'Wenn ja, wird an die angegebene E-Mail-Adresse eine kurze Bestätigungsmail mit den wichtigsten Informationen gesendet');
+define('_MI_CONTACT_LOG_IP', 'IP-Adressen protokollieren?');
+define('_MI_CONTACT_LOG_IP_DESC', 'Wenn aktiviert, wird die IP-Adresse des Benutzers bei jeder Übermittlung protokolliert.');
 define('_MI_CONTACT_RECIPIENT_STD', 'Standardempfänger');
 define('_MI_CONTACT_RECIPIENT_STD_DESC', 'An diese E-Mail-Adresse wird jede Kontaktanfrage per Mail gesendet');
 

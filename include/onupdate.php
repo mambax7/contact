@@ -207,4 +207,9 @@ function xoops_module_update_contact(\XoopsModule $module, $previousVersion = nu
         $sql = 'ALTER TABLE `' . $xoopsDB->prefix('contact') . '` ADD `contact_skype` VARCHAR(255) NULL AFTER `contact_icq`';
         $xoopsDB->query($sql);
     }
+
+    // Convert table to InnoDB
+    $utility->convertToInnoDB($module->getVar('dirname'));
+
+    return true;
 }

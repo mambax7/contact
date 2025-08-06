@@ -66,6 +66,11 @@ if ($helper->getConfig('show_breadcrumbs')) {
 $uid = is_object($xoopsUser) ? $xoopsUser->getVar('uid') : 0;
 $GLOBALS['xoopsTpl']->assign('contact_uid', $uid);
 
+//-CSRF-------------------------
+$token = $GLOBALS['xoopsSecurity']->generateToken();
+$GLOBALS['xoopsTpl']->assign('csrf_token', $token);
+//------------------------------
+
 /* lang vars, added by goffy */
 $GLOBALS['xoopsTpl']->assign('lng_username', _MD_CONTACT_NAME);
 $GLOBALS['xoopsTpl']->assign('lng_email', _MD_CONTACT_MAIL);

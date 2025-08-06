@@ -6,13 +6,13 @@
 
 <{if $show_breadcrumbs|default:false}>
     <ol class="breadcrumb">
-        <{$breadcrumb}>
+        <{$breadcrumb|escape}>
     </ol>
 <{/if}>
 
 <{if $info|default:false}>
 <div id="about" class="center bg-contact" style="padding-bottom: 20px; padding-top: 5px;">
-    <{$info}>
+    <{$info|escape}>
 </div>
 <{/if}>
 
@@ -23,7 +23,7 @@
 <{/if}>
     <{if $contact_default|default:''}>
         <div id="contact-default" class="col-xs-12 col-sm-12 col-md-3 col-lg-3 contact-default-text">
-            <{$contact_default}>
+            <{$contact_default|escape}>
         </div>
         <div id="contact-form" class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
     <{else}>
@@ -31,7 +31,7 @@
     <{/if}>
 
     <form name="save" id="save" action="<{xoAppUrl}>modules/contact/send.php" onsubmit="return xoopsFormValidate_save();" method="post" enctype="multipart/form-data">
-        <{securityToken}><{*//mb*}>
+        <input type="hidden" name="csrf_token" value="<{$csrf_token}>">
         <div class="form-group">
             <label for="contact_name"><{$lng_username|default:''}></label>
             <input type="text" class="form-control" id="contact_name" name="contact_name" placeholder="<{$lng_username_info|default:''}>">
@@ -106,7 +106,7 @@
           <input type="hidden" name="contact_uid" id="contact_uid" value="<{$contact_uid|default:''}>">
 
           <{if $recaptcha|default:false}>
-          <div class="g-recaptcha" data-sitekey="<{$recaptchakey}>"></div>
+          <div class="g-recaptcha" data-sitekey="<{$recaptchakey|escape}>"></div>
           <{/if}>
           <div class="center">
             <input type="submit" class="btn btn-primary center" name="submit" id="submit" value="<{$lng_submit|default:''}>" title="<{$lng_submit|default:''}>" style="margin: 10px 0;" >

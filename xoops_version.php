@@ -153,6 +153,15 @@ $modversion['config'][] = [
 ];
 
 $modversion['config'][] = [
+    'name'        => 'log_ip',
+    'title'       => '_MI_CONTACT_LOG_IP',
+    'description' => '_MI_CONTACT_LOG_IP_DESC',
+    'formtype'    => 'yesno',
+    'valuetype'   => 'int',
+    'default'     => 1,
+];
+
+$modversion['config'][] = [
     'name'        => 'sendmail',
     'title'       => '_MI_CONTACT_MAIL_SEND',
     'description' => '_MI_CONTACT_MAIL_SEND_DESC',

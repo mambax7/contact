@@ -50,6 +50,11 @@ if (!$captcha && $helper->getConfig('recaptchause')) {
     if (false === $response && $helper->getConfig('recaptchause')) {
         redirect_header('index.php', 2, _MD_CONTACT_MES_CAPTCHAINCORRECT);
     } else {
+        // Check for CSRF token
+        if (!$GLOBALS['xoopsSecurity']->check()) {
+            redirect_header('index.php', 3, implode('<br>', $GLOBALS['xoopsSecurity']->getErrors()));
+        }
+
         global $xoopsConfig, $xoopsOption, $xoopsTpl, $xoopsUser, $xoopsUserIsAdmin, $xoopsLogger;
         $op         = Request::getString('op', 'form', 'POST');
         $department = Request::getString('department', '', 'GET');
@@ -57,9 +62,26 @@ if (!$captcha && $helper->getConfig('recaptchause')) {
             if ('' === Request::getString('submit', '', 'POST')) {
                 redirect_header(XOOPS_URL, 3, _MD_CONTACT_MES_ERROR);
             } else {
-                // check email
-                if ('' === Request::getString('contact_mail', '', 'POST')) {
-                    redirect_header('index.php', 1, _MD_CONTACT_MES_NOVALIDEMAIL);
+                // Validation
+                $errors = [];
+                if ('' === Request::getString('contact_name', '', 'POST')) {
+                    $errors[] = _MD_CONTACT_MES_NONAME;
+                }
+                if ('' === Request::getString('contact_subject', '', 'POST')) {
+                    $errors[] = _MD_CONTACT_MES_NOSUBJECT;
+                }
+                if ('' === Request::getString('contact_message', '', 'POST')) {
+                    $errors[] = _MD_CONTACT_MES_NOMESSAGE;
+                }
+                $contact_mail = Request::getString('contact_mail', '', 'POST');
+                if ('' === $contact_mail) {
+                    $errors[] = _MD_CONTACT_MES_NOVALIDEMAIL;
+                } elseif (!filter_var($contact_mail, FILTER_VALIDATE_EMAIL)) {
+                    $errors[] = _MD_CONTACT_MES_NOVALIDEMAIL;
+                }
+
+                if (count($errors) > 0) {
+                    redirect_header('index.php', 3, implode('<br>', $errors));
                 }
 
                 // Info Processing

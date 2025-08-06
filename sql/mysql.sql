@@ -28,4 +28,4 @@ CREATE TABLE contact (
   KEY (contact_platform),
   KEY (contact_type)
 )
-  ENGINE = MyISAM;
+  ENGINE = InnoDB;

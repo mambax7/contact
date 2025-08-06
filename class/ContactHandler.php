@@ -31,12 +31,15 @@ use XoopsPersistableObjectHandler;
  */
 class ContactHandler extends XoopsPersistableObjectHandler
 {
+    private $helper;
+
     /**
      * ContactHandler constructor.
      */
     public function __construct(\XoopsDatabase $db = null)
     {
         parent::__construct($db, 'contact', Contact::class, 'contact_id', 'contact_mail');
+        $this->helper = Helper::getInstance();
     }
 
     /**
@@ -117,9 +120,13 @@ class ContactHandler extends XoopsPersistableObjectHandler
         $contact['contact_skype']      = Request::getString('contact_skype', '', 'POST');
         $contact['contact_company']    = Request::getString('contact_company', '', 'POST');
         $contact['contact_location']   = Request::getString('contact_location', '', 'POST');
-        $contact['contact_phone']      = Request::getString('contact_phone', '', 'int');
-        $contact['contact_department'] = Request::getString('contact_department', \xoops_getModuleOption('contact_recipient_std', 'contact'), 'POST');
-        $contact['contact_ip']         = \getenv('REMOTE_ADDR');
+        $contact['contact_phone']      = Request::getString('contact_phone', '', 'POST');
+        $contact['contact_department'] = Request::getString('contact_department', $this->helper->getConfig('contact_recipient_std'), 'POST');
+        if ($this->helper->getConfig('log_ip')) {
+            $contact['contact_ip'] = $this->anonymizeIP($this->getIP());
+        } else {
+            $contact['contact_ip'] = '';
+        }
         $contact['contact_message']    = Request::getText('contact_message', '', 'POST');
         $contact['contact_address']    = Request::getString('contact_address', '', 'POST');
         $contact['contact_platform']   = Request::getString('contact_platform', 'Web', 'POST');
@@ -143,8 +150,8 @@ class ContactHandler extends XoopsPersistableObjectHandler
 
         $info          = '';
         $subjectPrefix = '';
-        if ($GLOBALS['xoopsModuleConfig']['form_dept'] && $GLOBALS['xoopsModuleConfig']['subject_prefix'] && $GLOBALS['xoopsModuleConfig']['contact_dept']) {
-            $subjectPrefix = '[' . $GLOBALS['xoopsModuleConfig']['prefix_text'] . ' ' . $contact['contact_department'] . ']: ';
+        if ($this->helper->getConfig('form_dept') && $this->helper->getConfig('subject_prefix') && $this->helper->getConfig('contact_dept')) {
+            $subjectPrefix = '[' . $this->helper->getConfig('prefix_text') . ' ' . $contact['contact_department'] . ']: ';
             $info          .= _MD_CONTACT_DEPARTMENT . ': ' . $contact['contact_department'] . "\n";
         }
         $xoopsMailer->setSubject($subjectPrefix . \html_entity_decode($contact['contact_subject'], \ENT_QUOTES, 'UTF-8'));
@@ -197,8 +204,8 @@ class ContactHandler extends XoopsPersistableObjectHandler
         $xoopsMailer = \xoops_getMailer();
         $xoopsMailer->useMail();
         $xoopsMailer->setToEmails($contact['contact_mail']);
-        $xoopsMailer->setFromEmail(\xoops_getModuleOption('contact_recipient_std', 'contact'));
-        $xoopsMailer->setFromName(\html_entity_decode($GLOBALS['xoopsConfig']['sitename'], \ENT_QUOTES, 'UTF-8'));
+        $xoopsMailer->setFromEmail($this->helper->getConfig('contact_recipient_std'));
+        $xoopsMailer->setFromName(\html_entity_decode($this->helper->getConfig('sitename'), \ENT_QUOTES, 'UTF-8'));
 
         $xoopsMailer->setSubject(_MD_CONTACT_MAILCONFIRM_SUBJECT);
 
@@ -271,9 +278,9 @@ class ContactHandler extends XoopsPersistableObjectHandler
     public function contactToEmails($department = null): array
     {
         //        global $xoopsConfig;
-        $department_mail[] = \xoops_getModuleOption('contact_recipient_std', 'contact');
+        $department_mail[] = $this->helper->getConfig('contact_recipient_std');
         if (!empty($department)) {
-            $departments = \xoops_getModuleOption('contact_dept', 'contact');
+            $departments = $this->helper->getConfig('contact_dept');
             foreach ($departments as $vals) {
                 $vale = \explode(',', $vals);
                 if ($department == $vale[0]) {
@@ -492,5 +499,51 @@ class ContactHandler extends XoopsPersistableObjectHandler
         }
 
         return \array_unique($ret);
+    }
+
+    /**
+     * Get user IP
+     */
+    public function getIP()
+    {
+        $proxy_ip = '';
+        if (isset($_SERVER['HTTP_X_FORWARDED_FOR']) && !empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+            $proxy_ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        } elseif (isset($_SERVER['HTTP_X_FORWARDED']) && !empty($_SERVER['HTTP_X_FORWARDED'])) {
+            $proxy_ip = $_SERVER['HTTP_X_FORWARDED'];
+        } elseif (isset($_SERVER['HTTP_FORWARDED_FOR']) && !empty($_SERVER['HTTP_FORWARDED_FOR'])) {
+            $proxy_ip = $_SERVER['HTTP_FORWARDED_FOR'];
+        } elseif (isset($_SERVER['HTTP_FORWARDED']) && !empty($_SERVER['HTTP_FORWARDED'])) {
+            $proxy_ip = $_SERVER['HTTP_FORWARDED'];
+        } elseif (isset($_SERVER['HTTP_VIA']) && !empty($_SERVER['HTTP_VIA'])) {
+            $proxy_ip = $_SERVER['HTTP_VIA'];
+        } elseif (isset($_SERVER['HTTP_X_COMING_FROM']) && !empty($_SERVER['HTTP_X_COMING_FROM'])) {
+            $proxy_ip = $_SERVER['HTTP_X_COMING_FROM'];
+        } elseif (isset($_SERVER['HTTP_COMING_FROM']) && !empty($_SERVER['HTTP_COMING_FROM'])) {
+            $proxy_ip = $_SERVER['HTTP_COMING_FROM'];
+        }
+
+        return $proxy_ip ?: $_SERVER['REMOTE_ADDR'];
+    }
+
+    /**
+     * @param $ip
+     * @return string
+     */
+    public function anonymizeIP($ip)
+    {
+        if (!filter_var($ip, FILTER_VALIDATE_IP)) {
+            return '';
+        }
+
+        if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4)) {
+            return inet_ntop(inet_pton($ip) & inet_pton('255.255.255.0'));
+        }
+
+        if (filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6)) {
+            return inet_ntop(inet_pton($ip) & inet_pton('ffff:ffff:ffff:ffff:0000:0000:0000:0000'));
+        }
+
+        return '';
     }
 }

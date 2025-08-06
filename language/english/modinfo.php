@@ -70,6 +70,8 @@ define('_MI_CONTACT_HEAD_DEPT', 'Options for usage of departments/recipients');
 define('_MI_CONTACT_HEAD_MISC', 'Misc options');
 define('_MI_CONTACT_MAIL_CONFIRM', 'Send confirmation email?');
 define('_MI_CONTACT_MAIL_CONFIRM_DESC', 'If yes, a short confirmation email with the basic information will be sent to given email-address.');
+define('_MI_CONTACT_LOG_IP', 'Log IP addresses?');
+define('_MI_CONTACT_LOG_IP_DESC', 'If enabled, the IP address of the user will be logged with each submission.');
 define('_MI_CONTACT_RECIPIENT_STD', 'Standard recipient');
 define('_MI_CONTACT_RECIPIENT_STD_DESC', 'Each contact request will be sent to this e-mail-address');
 
