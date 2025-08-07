@@ -1,0 +1,21 @@
+{
+    "name": "xoopsmodules/contact",
+    "description": "Contact module for XOOPS CMS",
+    "type": "xoops-module",
+    "license": "GPL-2.0-or-later",
+    "authors": [
+        {
+            "name": "XOOPS Project",
+            "email": "author-email",
+            "homepage": "https://xoops.org"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "XoopsModules\\Contact\\": "class/"
+        }
+    }
+}
